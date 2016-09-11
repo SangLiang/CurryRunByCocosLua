@@ -70,3 +70,7 @@ LOAD LUA FILE: C:/Users/admin/Desktop/cocosCurryRun/curryRun/src/main.lua
 
 [LUA-print] [INFO] #
 
+Node warning: setPhysicsBody sets anchor point to Vec2::ANCHOR_MIDDLE.
+
+Node warning: setPhysicsBody sets anchor point to Vec2::ANCHOR_MIDDLE.
+

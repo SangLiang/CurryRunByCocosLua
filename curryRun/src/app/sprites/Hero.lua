@@ -20,7 +20,8 @@ function Hero:ctor()
 	sp:pos(0,0)
 		:scale(0.5,0.5)
 		:addTo(self)
-		:playAnimationForever(animation)
+		--:runAction(animate) --播放一次
+		:playAnimationForever(animation) -- 循环播放动作
 
 end
 
