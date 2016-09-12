@@ -4,10 +4,75 @@
     <dict>
         <key>frames</key>
         <dict>
+            <key>1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{651,400},{128,124}}</string>
+                <key>offset</key>
+                <string>{0,-2}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,4},{128,124}}</string>
+                <key>sourceSize</key>
+                <string>{128,128}</string>
+            </dict>
+            <key>BasketBall.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{347,224},{296,302}}</string>
+                <key>offset</key>
+                <string>{-2,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{296,302}}</string>
+                <key>sourceSize</key>
+                <string>{300,302}</string>
+            </dict>
+            <key>James_1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{347,2},{336,220}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{336,220}}</string>
+                <key>sourceSize</key>
+                <string>{336,220}</string>
+            </dict>
+            <key>James_2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{685,2},{322,252}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,1},{322,252}}</string>
+                <key>sourceSize</key>
+                <string>{322,254}</string>
+            </dict>
+            <key>James_3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,2},{343,231}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{343,231}}</string>
+                <key>sourceSize</key>
+                <string>{343,231}</string>
+            </dict>
             <key>curyRun_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{286,2},{142,218}}</string>
+                <string>{{651,256},{142,218}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,11 +85,11 @@
             <key>curyRun_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,253},{105,234}}</string>
+                <string>{{2,341},{105,234}}</string>
                 <key>offset</key>
                 <string>{0,1}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{105,234}}</string>
                 <key>sourceSize</key>
@@ -33,11 +98,11 @@
             <key>curyRun_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{108,2},{176,229}}</string>
+                <string>{{2,448},{176,229}}</string>
                 <key>offset</key>
                 <string>{0,1}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{176,229}}</string>
                 <key>sourceSize</key>
@@ -46,15 +111,28 @@
             <key>curyRun_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{104,249}}</string>
+                <string>{{2,235},{104,249}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{104,249}}</string>
                 <key>sourceSize</key>
                 <string>{104,249}</string>
+            </dict>
+            <key>sheled.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{871,256},{150,179}}</string>
+                <key>offset</key>
+                <string>{0,-4}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,8},{150,179}}</string>
+                <key>sourceSize</key>
+                <string>{150,187}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -64,9 +142,9 @@
             <key>realTextureFileName</key>
             <string>hero.pvr.ccz</string>
             <key>size</key>
-            <string>{512,512}</string>
+            <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:773ae10316a3ad285d4af8304e57a828$</string>
+            <string>$TexturePacker:SmartUpdate:54d713db07bcfb0490afbbd29ad78fce$</string>
             <key>textureFileName</key>
             <string>hero.pvr.ccz</string>
         </dict>

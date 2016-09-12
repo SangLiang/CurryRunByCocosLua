@@ -1,7 +1,7 @@
 -- 游戏主场景
 local Hero = require("app.sprites.Hero")
+local James = require("app.sprites.James")
 local BackGroundLayer = require("app.layers.BackGroundLayer")
-
 
 local MainScene = class("MainScene", function()
 	return display.newPhysicsScene('MainScene')
@@ -11,17 +11,20 @@ end)
 function MainScene:ctor()
 	self.world = self:getPhysicsWorld()
 	self.world:setGravity(cc.p(0, -98.0))
-	self.world:setDebugDrawMask(cc.PhysicsWorld.DEBUGDRAW_ALL)
 
+	-- 物理世界的调试
+	-- self.world:setDebugDrawMask(cc.PhysicsWorld.DEBUGDRAW_ALL)
 	
     local width = display.width
     local height1 = display.height * 9 / 10
-    local height2 = display.height * 3 / 16
-    local sky = display.newNode()
+    local height2 = display.height * 2 / 16
+
 	 -- 设置物理天空与物理地面
+	local sky = display.newNode()
     local bodyTop = cc.PhysicsBody:createEdgeSegment(cc.p(0, height1), cc.p(width, height1))
     sky:setPhysicsBody(bodyTop)
     self:addChild(sky)
+
     local ground = display.newNode()
     local bodyBottom = cc.PhysicsBody:createEdgeSegment(cc.p(0, height2), cc.p(width, height2))
     ground:setPhysicsBody(bodyBottom)
@@ -31,7 +34,6 @@ function MainScene:ctor()
     --         UILabelType = 2, text = "Hello, World", size = 64})
     --     :align(display.CENTER, display.cx, display.cy)
     --     :addTo(self,2)
-
 end
 
 function MainScene:onEnter()
@@ -44,16 +46,16 @@ function MainScene:onEnter()
 	-- edgeNode:pos(display.left,display.button)
 	-- 	:setPhysicsBody(edgeBody)
 	-- dump(edgeNode)
+
 	-- 初始化一个英雄
 	local hero = Hero.new()
+	local james = James.new()
 
+	james:addTo(self,1)
+		:pos(display.right-80,display.top - 70)
 	hero:addTo(self,1)
 		:pos(50,display.cy-130)
-		
-	local heroBody  = cc.PhysicsBody:createBox(hero:getContentSize(),cc.PHYSICSBODY_MATERIAL_DEFAULT,cc.p(0,0))
-	heroBody:applyImpulse(cc.p(0,9.8))
-	hero:setPhysicsBody(heroBody)
-
+	
 	-- local sp2 = display.newSprite("#curyRun_1.png")
 	-- 	:center()
 	-- 	:addTo(self,1)

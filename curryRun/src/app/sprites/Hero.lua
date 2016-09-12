@@ -23,6 +23,11 @@ function Hero:ctor()
 		--:runAction(animate) --播放一次
 		:playAnimationForever(animation) -- 循环播放动作
 
+	--创建物理节点 
+	local heroBody  = cc.PhysicsBody:createBox(cc.size(sp:getContentSize().width/2, sp:getContentSize().height/2),cc.PHYSICSBODY_MATERIAL_DEFAULT,cc.p(0,0))
+	-- heroBody:applyImpulse(cc.p(0,9.8))
+	heroBody:setMass(100)
+	sp:setPhysicsBody(heroBody)
 end
 
 function Hero:changePos(sprite,xPosition)
