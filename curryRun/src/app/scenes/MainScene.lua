@@ -1,6 +1,8 @@
 -- 游戏主场景
 local Hero = require("app.sprites.Hero")
 local James = require("app.sprites.James")
+local  BasketBall = require("app.sprites.BasketBall")
+local bg  = nil;
 local BackGroundLayer = require("app.layers.BackGroundLayer")
 
 local MainScene = class("MainScene", function()
@@ -13,7 +15,7 @@ function MainScene:ctor()
 	self.world:setGravity(cc.p(0, -98.0))
 
 	-- 物理世界的调试
-	-- self.world:setDebugDrawMask(cc.PhysicsWorld.DEBUGDRAW_ALL)
+	self.world:setDebugDrawMask(cc.PhysicsWorld.DEBUGDRAW_ALL)
 	
     local width = display.width
     local height1 = display.height * 9 / 10
@@ -21,14 +23,19 @@ function MainScene:ctor()
 
 	 -- 设置物理天空与物理地面
 	local sky = display.newNode()
-    local bodyTop = cc.PhysicsBody:createEdgeSegment(cc.p(0, height1), cc.p(width, height1))
+    local bodyTop = cc.PhysicsBody:createEdgeSegment(cc.p(0, height1),cc.PhysicsMaterial(0, 0, 0), cc.p(width, height1))
     sky:setPhysicsBody(bodyTop)
-    self:addChild(sky)
+    -- self:addChild(sky)
 
     local ground = display.newNode()
     local bodyBottom = cc.PhysicsBody:createEdgeSegment(cc.p(0, height2), cc.p(width, height2))
+    -- local bodyBottom = cc.PhysicsBody:createBox(cc.p(0, height2), cc.PhysicsMaterial(0, 1, 0),cc.p(width, height2))
     ground:setPhysicsBody(bodyBottom)
     self:addChild(ground)
+
+    self:addCollision()
+    -- self.world:EventListenerPhysicsContactWithGroup()
+
 		-- :setDebugDrawMask(cc.PhysicsWorld.DEBUGDRAW_ALL)
     -- cc.ui.UILabel.new({
     --         UILabelType = 2, text = "Hello, World", size = 64})
@@ -50,12 +57,23 @@ function MainScene:onEnter()
 	-- 初始化一个英雄
 	local hero = Hero.new()
 	local james = James.new()
+	
+
 
 	james:addTo(self,1)
 		:pos(display.right-80,display.top - 70)
 	hero:addTo(self,1)
 		:pos(50,display.cy-130)
 	
+
+	local function buildBasketBall()
+		local basketBall = BasketBall.new()
+		basketBall:addTo(self,1)
+			:pos(display.right-80,display.top-70)
+	end
+
+
+	cc.Director:getInstance():getScheduler():scheduleScriptFunc(buildBasketBall,2,false)
 	-- local sp2 = display.newSprite("#curyRun_1.png")
 	-- 	:center()
 	-- 	:addTo(self,1)
@@ -65,8 +83,8 @@ function MainScene:onEnter()
 	-- end,0.2,false)
 
 	-- 初始化一个背景层
-	local bg = BackGroundLayer.new()
-	bg:addTo(self,0)
+	bg = BackGroundLayer.new()
+	bg:addTo(self,-1)
 		:setTouchEnabled(true)
 		:setTouchMode(cc.TOUCH_MODE_ONE_BY_ONE)
 		:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event) 
@@ -75,6 +93,74 @@ function MainScene:onEnter()
 end
 
 function MainScene:onExit()
+end
+
+function MainScene:addCollision()
+
+    local function contactLogic(node)
+        -- if node:getTag() == HEART_TAG then
+        --     local emitter = cc.ParticleSystemQuad:create("particles/stars.plist")
+        --     emitter:setBlendAdditive(false)
+        --     emitter:setPosition(node:getPosition())
+        --     self.backgroundLayer.map:addChild(emitter)
+        --     if self.player.blood < 100 then
+
+        --         self.player.blood = self.player.blood + 2
+        --         self.player:setProPercentage(self.player.blood)
+        --     end
+        --     audio.playSound("sound/heart.mp3")
+
+        --     node:removeFromParent()
+
+        -- elseif node:getTag() == GROUND_TAG then
+        --     self.player:hit()
+        --     self.player.blood = self.player.blood - 20
+        --     self.player:setProPercentage(self.player.blood)
+        --     audio.playSound("sound/ground.mp3")
+        -- elseif node:getTag() == AIRSHIP_TAG then
+        --     self.player:hit()
+        --     self.player.blood = self.player.blood - 10
+        --     self.player:setProPercentage(self.player.blood)
+        --     audio.playSound("sound/hit.mp3")
+        -- elseif node:getTag() == BIRD_TAG then
+        --     self.player:hit()
+        --     self.player.blood = self.player.blood - 5
+        --     self.player:setProPercentage(self.player.blood)
+        --     audio.playSound("sound/hit.mp3")
+        -- end
+    end
+
+    local function onContactBegin(contact)
+    	print(contact)
+		self:removeChild(bg)
+    	local  s =  require('app.scenes.StartScene').new()
+		display.replaceScene(s,"fade",0.6,display.COLOR_BLACK)
+        -- local a = contact:getShapeA():getBody():getNode()
+        -- local b = contact:getShapeB():getBody():getNode()
+        -- contactLogic(a)
+        -- contactLogic(b)
+
+        -- return true
+    end
+
+    local function onContactSeperate(contact)
+        -- if self.player.blood <= 0 then 
+        --     self.backgroundLayer:unscheduleUpdate()
+        --     self.player:die()
+
+        --     local over = display.newSprite("image/over.png")
+        --         :pos(display.cx, display.cy)
+        --         :addTo(self)
+
+        --         cc.Director:getInstance():getEventDispatcher():removeAllEventListeners()
+        -- end
+    end
+    
+    local contactListener = cc.EventListenerPhysicsContact:create()
+    contactListener:registerScriptHandler(onContactBegin, cc.Handler.EVENT_PHYSICS_CONTACT_BEGIN)
+    contactListener:registerScriptHandler(onContactSeperate, cc.Handler.EVENT_PHYSICS_CONTACT_SEPERATE)
+    local eventDispatcher = cc.Director:getInstance():getEventDispatcher()
+    eventDispatcher:addEventListenerWithFixedPriority(contactListener, 1)
 end
 
 return MainScene

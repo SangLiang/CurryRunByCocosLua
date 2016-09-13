@@ -16,7 +16,7 @@ function MyApp:run()
     -- 游戏主场景
     self:enterScene("MainScene")
     --游戏结束场景
-    self:enterScene("EndGameScene")
+    -- self:enterScene("EndScene")
     
 end
 
