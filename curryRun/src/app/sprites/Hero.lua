@@ -23,7 +23,7 @@ function Hero:ctor()
 		:playAnimationForever(animation) -- 循环播放动作
 
 	--创建物理节点 
-	local heroBody  = cc.PhysicsBody:createBox(cc.size(sp:getContentSize().width/2, sp:getContentSize().height/2),cc.PHYSICSBODY_MATERIAL_DEFAULT,cc.p(0,0))
+	local heroBody  = cc.PhysicsBody:createBox(cc.size(sp:getContentSize().width/3.5, sp:getContentSize().height/2),cc.PhysicsMaterial(1, 0, 0),cc.p(0,0))
 	-- heroBody:applyImpulse(cc.p(0,9.8))
 	heroBody:setMass(HERO_MASS)
 		-- :setIsSensor(true)

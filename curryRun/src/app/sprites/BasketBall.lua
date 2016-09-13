@@ -11,6 +11,7 @@ local COIN_ELASTICITY = 5000
 function BasketBall:ctor()
 	display.addSpriteFrames("hero.plist","hero.pvr.ccz")
 	local  sp = display.newSprite("#BasketBall.png")
+    local timer
 	sp:scale(0.12,0.12)
 	-- local coinBody = cc.PhysicsBody:createCircle(sp:getContentSize().width/14,cc.PhysicsMaterial(COIN_RADIUS, COIN_FRICTION, COIN_ELASTICITY))
 
@@ -29,11 +30,18 @@ function BasketBall:ctor()
 
 
     local function removeSelf()
-    	self:removeChild(sp)
+        if(GAME_RESULT == false) then
+            cc.Director:getInstance():getScheduler():unscheduleScriptEntry(timer)
+            return 
+        end
+        self:removeChild(sp)
+
     end
 
     -- 每间隔10秒销毁掉自己
-    cc.Director:getInstance():getScheduler():scheduleScriptFunc(removeSelf,10,false)
+    if (GAME_RESULT == true) then
+        timer =  cc.Director:getInstance():getScheduler():scheduleScriptFunc(removeSelf,10,false)
+    end
 end
 
 return BasketBall

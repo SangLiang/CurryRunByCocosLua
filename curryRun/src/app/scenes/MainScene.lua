@@ -53,11 +53,11 @@ function MainScene:onEnter()
 	-- edgeNode:pos(display.left,display.button)
 	-- 	:setPhysicsBody(edgeBody)
 	-- dump(edgeNode)
-
+    GAME_RESULT = true
 	-- 初始化一个英雄
 	local hero = Hero.new()
 	local james = James.new()
-	
+	local timer 
 
 
 	james:addTo(self,1)
@@ -67,13 +67,18 @@ function MainScene:onEnter()
 	
 
 	local function buildBasketBall()
+        if(GAME_RESULT == false) then
+            cc.Director:getInstance():getScheduler():unscheduleScriptEntry(timer)
+            return
+        end
 		local basketBall = BasketBall.new()
 		basketBall:addTo(self,1)
 			:pos(display.right-80,display.top-70)
 	end
 
-
-	cc.Director:getInstance():getScheduler():scheduleScriptFunc(buildBasketBall,2,false)
+    if(GAME_RESULT == true) then
+    	timer  = cc.Director:getInstance():getScheduler():scheduleScriptFunc(buildBasketBall,2,false)
+    end
 	-- local sp2 = display.newSprite("#curyRun_1.png")
 	-- 	:center()
 	-- 	:addTo(self,1)
@@ -90,6 +95,11 @@ function MainScene:onEnter()
 		:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event) 
 			hero:changePos(hero,event.x)
 		end)
+
+    -- 创建一个得分UI层
+    local ui = require("app.ui.GameUI").new()
+    ui:addTo(self,2)
+        :setTouchEnabled(false)
 end
 
 function MainScene:onExit()
@@ -131,8 +141,12 @@ function MainScene:addCollision()
     end
 
     local function onContactBegin(contact)
-    	print(contact)
-		self:removeChild(bg)
+    	-- print(contact)
+        GAME_RESULT = false
+        -- cc.Director:getInstance():getScheduler():unscheduleAllSelectors()
+
+        -- cc.Director:getInstance():getScheduler():unscheduleScriptEntry(timer)
+		-- self:removeChild(bg)
     	local  s =  require('app.scenes.StartScene').new()
 		display.replaceScene(s,"fade",0.6,display.COLOR_BLACK)
         -- local a = contact:getShapeA():getBody():getNode()
