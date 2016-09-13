@@ -24,6 +24,7 @@ function BackGroundLayer:moveBg(backGround)
 	-- print(backGround:getContentSize().height)
 	-- 背景的移动
 	local function move()
+
 		local x,y = backGround:getPosition()
 			if(x<-600) then
 				x = display.cx +1500
