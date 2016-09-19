@@ -31,6 +31,8 @@ function Hero:ctor()
 		:setCategoryBitmask(0x0111)
     	:setContactTestBitmask(0x1111)
 		:setCollisionBitmask(0x1001)
+		-- 使刚体成为静态物体
+		-- :setDynamic(false)
 		-- :setCollisionType(2)
 
 	sp:setPhysicsBody(heroBody)

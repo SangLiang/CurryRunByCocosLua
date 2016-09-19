@@ -34,8 +34,10 @@ function BasketBall:ctor()
             cc.Director:getInstance():getScheduler():unscheduleScriptEntry(timer)
             return 
         end
-        self:removeChild(sp)
-
+        
+        if(GAME_RESULT == true) then
+            self:removeChild(sp)
+        end
     end
 
     -- 每间隔10秒销毁掉自己

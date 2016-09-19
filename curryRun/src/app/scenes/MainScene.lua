@@ -2,9 +2,9 @@
 local Hero = require("app.sprites.Hero")
 local James = require("app.sprites.James")
 local  BasketBall = require("app.sprites.BasketBall")
-local bg  = nil;
 local BackGroundLayer = require("app.layers.BackGroundLayer")
-
+local bg  = nil;
+local gameScore
 local MainScene = class("MainScene", function()
 	return display.newPhysicsScene('MainScene')
     -- return display.newScene("MainScene")
@@ -59,6 +59,19 @@ function MainScene:onEnter()
 	local james = James.new()
 	local timer 
 
+    -- 初始化一个背景层
+    bg = BackGroundLayer.new()
+    bg:addTo(self,-1)
+        :setTouchEnabled(true)
+        :setTouchMode(cc.TOUCH_MODE_ONE_BY_ONE)
+        :addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event) 
+            hero:changePos(hero,event.x)
+        end)
+
+    -- 创建一个得分UI层
+    gameScore = require("app.ui.GameUI").new()
+    gameScore:addTo(self,2)
+        :setTouchEnabled(false)
 
 	james:addTo(self,1)
 		:pos(display.right-80,display.top - 70)
@@ -74,6 +87,9 @@ function MainScene:onEnter()
 		local basketBall = BasketBall.new()
 		basketBall:addTo(self,1)
 			:pos(display.right-80,display.top-70)
+
+        GAME_SCORE = GAME_SCORE+1
+        gameScore:refreshUI()
 	end
 
     if(GAME_RESULT == true) then
@@ -87,19 +103,7 @@ function MainScene:onEnter()
 	-- 	sp2:runAction(animate)
 	-- end,0.2,false)
 
-	-- 初始化一个背景层
-	bg = BackGroundLayer.new()
-	bg:addTo(self,-1)
-		:setTouchEnabled(true)
-		:setTouchMode(cc.TOUCH_MODE_ONE_BY_ONE)
-		:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event) 
-			hero:changePos(hero,event.x)
-		end)
-
-    -- 创建一个得分UI层
-    local ui = require("app.ui.GameUI").new()
-    ui:addTo(self,2)
-        :setTouchEnabled(false)
+	
 end
 
 function MainScene:onExit()

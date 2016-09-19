@@ -24,4 +24,8 @@ CONFIG_SCREEN_HEIGHT = 640
 -- auto scale mode
 CONFIG_SCREEN_AUTOSCALE = "FIXED_HEIGHT"
 
+-- 游戏结果
 GAME_RESULT =  true
+
+-- 游戏分数
+GAME_SCORE = 0
